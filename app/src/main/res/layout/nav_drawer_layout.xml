@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#18181b">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,21 +13,29 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Categories -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_open_stats"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistics &amp; Reports"
+            app:cornerRadius="8dp"
+            android:layout_marginBottom="24dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Manage Categories"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="#27272a"
+            app:cardBackgroundColor="@color/surface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -39,21 +47,17 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_category"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.FT.TextInput"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="New Category Name"
-                    android:textColorHint="#a1a1aa"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
+                    android:hint="New Category Name">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#18181b"
-                        android:textColor="@color/white"
+                        android:textColor="@color/textPrimary"
                         android:inputType="textCapWords"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,15 +83,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#3f3f46"
+            android:background="?android:attr/listDivider"
             android:layout_marginVertical="24dp"/>
 
-        <!-- Budgets -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Budget"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
@@ -96,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="#27272a"
+            app:cardBackgroundColor="@color/surface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -110,35 +113,29 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Category"
-                    android:textColorHint="#a1a1aa">
+                    android:hint="Category">
 
                     <AutoCompleteTextView
                         android:id="@+id/spinner_budget_category"
+                        style="@style/Widget.FT.AutoComplete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        android:background="#18181b"
-                        android:textColor="@color/white"/>
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_budget_amount"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.FT.TextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Budget Amount"
-                    android:textColorHint="#a1a1aa"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
                     android:layout_marginTop="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_budget_amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#18181b"
-                        android:textColor="@color/white"
+                        android:textColor="@color/textPrimary"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,15 +161,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#3f3f46"
+            android:background="?android:attr/listDivider"
             android:layout_marginVertical="24dp"/>
 
-        <!-- Savings Goals (NEW) -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Savings Goals"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
@@ -181,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="#27272a"
+            app:cardBackgroundColor="@color/surface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -192,60 +188,48 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_goal_name"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.FT.TextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Goal Name"
-                    android:textColorHint="#a1a1aa"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
+                    android:hint="Goal Name">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_goal_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#18181b"
-                        android:textColor="@color/white"
+                        android:textColor="@color/textPrimary"
                         android:inputType="textCapWords"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_goal_target"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.FT.TextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Target Amount"
-                    android:textColorHint="#a1a1aa"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
                     android:layout_marginTop="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_goal_target"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#18181b"
-                        android:textColor="@color/white"
+                        android:textColor="@color/textPrimary"
                         android:inputType="numberDecimal"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_goal_date"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.FT.TextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Target Date (YYYY-MM-DD, optional)"
-                    android:textColorHint="#a1a1aa"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
                     android:layout_marginTop="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_goal_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#18181b"
-                        android:textColor="@color/white"
+                        android:textColor="@color/textPrimary"
                         android:inputType="text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 

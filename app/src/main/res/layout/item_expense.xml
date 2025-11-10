@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/surface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +21,15 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="Description" />
+            android:text="Description"
+            android:textColor="@color/textPrimary" />
 
         <TextView
             android:id="@+id/tvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category" />
+            android:text="Category"
+            android:textColor="@color/textSecondary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +43,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nov 03, 2025" />
+                android:text="Nov 03, 2025"
+                android:textColor="@color/textSecondary"/>
 
             <TextView
                 android:id="@+id/tvAmount"
@@ -48,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="$0.00"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"/>
 
             <ImageButton
                 android:id="@+id/btnDelete"
@@ -56,7 +61,7 @@
                 android:layout_height="36dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/delete"
-                android:src="@android:drawable/ic_menu_delete" />
-        </LinearLayout>
+                android:src="@android:drawable/ic_menu_delete"
+                app:tint="@color/textSecondary" /> </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

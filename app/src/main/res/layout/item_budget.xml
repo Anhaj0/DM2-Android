@@ -4,9 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#27272a"
-    app:cardCornerRadius="8dp"
-    app:strokeWidth="0dp"
     android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +25,7 @@
             android:id="@+id/text_budget_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/icon_sync_status"
@@ -42,7 +39,7 @@
             android:id="@+id/text_budget_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/button_delete"
@@ -57,7 +54,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_delete"
             android:padding="8dp"
-            app:tint="#a1a1aa"
+            app:tint="@color/textSecondary"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

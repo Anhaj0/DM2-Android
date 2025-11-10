@@ -14,6 +14,7 @@
         <TextView
             android:id="@+id/txtName"
             android:textStyle="bold"
+            android:textColor="@color/textPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -23,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="6dp"
             android:max="100"
-            android:progress="0"/>
+            android:progress="0" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,12 +36,14 @@
         <TextView
             android:id="@+id/txtPct"
             android:text="0%"
+            android:textColor="@color/textSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/txtAmt"
             android:text="$0.00"
+            android:textColor="@color/textPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

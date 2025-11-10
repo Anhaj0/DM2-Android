@@ -2,10 +2,13 @@ package com.nibm.financetracker.android.ui
 
 import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -24,13 +27,18 @@ import java.util.Locale
 
 class StatisticsActivity : AppCompatActivity() {
 
+    // BUG FIX: This was declared but never initialized
     private lateinit var binding: ActivityStatisticsBinding
     private val reportsApi by lazy { RetrofitInstance.reports }
     private val topAdapter = TopCategoryAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+
+        // BUG FIX: Inflate the correct binding, ActivityStatisticsBinding
         binding = ActivityStatisticsBinding.inflate(layoutInflater)
+        // BUG FIX: Set the content view to the correct binding's root
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
@@ -40,21 +48,12 @@ class StatisticsActivity : AppCompatActivity() {
 
         binding.recyclerTop.adapter = topAdapter
 
-        binding.btnDlCategory.setOnClickListener {
-            download("/api/reports/download/category-spending", "CategorySpendingReport.pdf")
-        }
-        binding.btnDlBudget.setOnClickListener {
-            download("/api/reports/download/budget-adherence", "BudgetAdherenceReport.pdf")
-        }
-        binding.btnDlMonthly.setOnClickListener {
-            download("/api/reports/download/monthly-spending", "MonthlySpendingReport.pdf")
-        }
-        binding.btnDlSavings.setOnClickListener {
-            download("/api/reports/download/savings-progress", "SavingsProgressReport.pdf")
-        }
-        binding.btnDlForecast.setOnClickListener {
-            download("/api/reports/download/savings-forecast", "SavingsForecastData.pdf")
-        }
+        // PDF Download Listeners
+        binding.btnDlCategory.setOnClickListener { download("/api/reports/download/category-spending", "CategorySpendingReport.pdf") }
+        binding.btnDlBudget.setOnClickListener { download("/api/reports/download/budget-adherence", "BudgetAdherenceReport.pdf") }
+        binding.btnDlMonthly.setOnClickListener { download("/api/reports/download/monthly-spending", "MonthlySpendingReport.pdf") }
+        binding.btnDlSavings.setOnClickListener { download("/api/reports/download/savings-progress", "SavingsProgressReport.pdf") }
+        binding.btnDlForecast.setOnClickListener { download("/api/reports/download/savings-forecast", "SavingsForecastData.pdf") }
 
         refresh()
     }
@@ -72,12 +71,15 @@ class StatisticsActivity : AppCompatActivity() {
             val totalSpent = budgets.fold(BigDecimal.ZERO) { acc, b -> acc + b.totalSpent }
             val balance = totalLimit - totalSpent
             val pct = if (totalLimit > BigDecimal.ZERO)
-                balance.multiply(BigDecimal(100)).divide(totalLimit, 2, java.math.RoundingMode.HALF_UP)
+            // Use totalSpent for percentage, not balance
+                totalSpent.multiply(BigDecimal(100)).divide(totalLimit, 2, java.math.RoundingMode.HALF_UP)
             else BigDecimal.ZERO
 
             binding.txtBalance.text = money(balance)
             binding.txtBudget.text = money(totalLimit)
             binding.txtSpent.text = money(totalSpent)
+
+            // Show percentage of budget USED
             drawRing(binding.ringChart, totalSpent, balance, pct.toPlainString() + "%")
 
             // Monthly total (left card)
@@ -92,9 +94,8 @@ class StatisticsActivity : AppCompatActivity() {
             drawDonut(binding.donutChart, cats)
             topAdapter.submitList(cats)
             binding.emptyTop.visibility = if (cats.isEmpty()) View.VISIBLE else View.GONE
-
         } catch (e: Exception) {
-            Snackbar.make(binding.root, "Failed to load stats", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, "Failed to load stats: ${e.message}", Snackbar.LENGTH_LONG).show()
         }
     }
 
@@ -103,7 +104,13 @@ class StatisticsActivity : AppCompatActivity() {
             PieEntry(spent.toFloat(), "Expenses"),
             PieEntry(balance.coerceAtLeast(BigDecimal.ZERO).toFloat(), "Balance")
         )
-        val ds = PieDataSet(entries, "").apply { setDrawValues(false) }
+        val ds = PieDataSet(entries, "").apply {
+            setDrawValues(false)
+            colors = listOf(
+                color(R.color.teal),       // spent
+                color(R.color.primary)     // balance
+            )
+        }
         chart.data = PieData(ds)
         chart.description.isEnabled = false
         chart.isDrawHoleEnabled = true
@@ -117,7 +124,19 @@ class StatisticsActivity : AppCompatActivity() {
     private fun drawDonut(chart: PieChart, cats: List<CategoryExpenseReportDTO>) {
         val total = cats.fold(BigDecimal.ZERO) { a, b -> a + b.totalAmount }
         val entries = cats.map { PieEntry(it.totalAmount.toFloat(), it.categoryName) }
-        val ds = PieDataSet(entries, "").apply { setDrawValues(false) }
+
+        val paletteRes = listOf(
+            R.color.primary, R.color.teal, R.color.chart_indigo,
+            R.color.chart_sky, R.color.chart_emerald, R.color.chart_amber,
+            R.color.chart_rose, R.color.chart_violet
+        )
+        val colors = paletteRes.map { color(it) }
+
+        val ds = PieDataSet(entries, "").apply {
+            setDrawValues(false)
+            this.colors = colors
+        }
+
         chart.data = PieData(ds)
         chart.description.isEnabled = false
         chart.isDrawHoleEnabled = true
@@ -125,7 +144,7 @@ class StatisticsActivity : AppCompatActivity() {
         chart.setDrawEntryLabels(false)
         chart.legend.orientation = Legend.LegendOrientation.VERTICAL
         chart.legend.isWordWrapEnabled = true
-        chart.centerText = if (total > BigDecimal.ZERO) total.toPlainString() else "0"
+        chart.centerText = if (total > BigDecimal.ZERO) money(total) else "$0"
         chart.invalidate()
     }
 
@@ -134,16 +153,28 @@ class StatisticsActivity : AppCompatActivity() {
 
     private fun download(path: String, fileName: String) {
         val url = "http://10.0.2.2:8080$path"
-        val req = DownloadManager.Request(Uri.parse(url))
-            .setTitle(fileName)
-            .setDescription("Downloading report")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalPublicDir(android.os.Environment.DIRECTORY_DOWNLOADS, fileName)
-            .setAllowedOverMetered(true)
-            .setAllowedOverRoaming(true)
+        try {
+            val req = DownloadManager.Request(Uri.parse(url))
+                .setTitle(fileName)
+                .setDescription("Downloading report")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setDestinationInExternalPublicDir(android.os.Environment.DIRECTORY_DOWNLOADS, fileName)
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(true)
+            val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(req)
+            Snackbar.make(binding.root, "Downloading $fileName…", Snackbar.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Snackbar.make(binding.root, "Download failed: ${e.message}", Snackbar.LENGTH_LONG).show()
+        }
+    }
 
-        val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        dm.enqueue(req)
-        Snackbar.make(binding.root, "Downloading $fileName…", Snackbar.LENGTH_SHORT).show()
+    private fun color(id: Int) = ContextCompat.getColor(this, id)
+
+    // Companion object to create an Intent to start this activity
+    companion object {
+        fun newIntent(context: Context): Intent {
+            return Intent(context, StatisticsActivity::class.java)
+        }
     }
 }

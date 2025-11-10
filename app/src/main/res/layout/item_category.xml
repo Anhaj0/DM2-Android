@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="12dp"
-    app:cardUseCompatPadding="true">
+    app:cardBackgroundColor="@color/surface">
 
     <TextView
         android:id="@+id/tvCategoryName"
@@ -15,5 +16,6 @@
         android:padding="12dp"
         android:text="Category"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/textPrimary"/>
 </androidx.cardview.widget.CardView>

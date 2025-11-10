@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.snackbar.Snackbar
 import com.nibm.financetracker.android.data.local.AppDatabase
 import com.nibm.financetracker.android.data.local.Budget
@@ -30,6 +31,7 @@ import com.nibm.financetracker.android.ui.BudgetAdapter
 import com.nibm.financetracker.android.ui.CategoryAdapter
 import com.nibm.financetracker.android.ui.ExpenseAdapter
 import com.nibm.financetracker.android.ui.SavingsGoalAdapter
+import com.nibm.financetracker.android.ui.StatisticsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.ParseException
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     private val apiDate = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
@@ -91,6 +94,12 @@ class MainActivity : AppCompatActivity() {
         navBinding.buttonSaveCategory.setOnClickListener { saveCategory() }
         navBinding.buttonSaveBudget.setOnClickListener { saveBudget() }
         navBinding.buttonSaveGoal.setOnClickListener { saveGoal() }
+
+        // BUG FIX: Add listener for the new Stats button
+        navBinding.buttonOpenStats.setOnClickListener {
+            startActivity(StatisticsActivity.newIntent(this))
+            mainBinding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
 
         // Observers
         observeExpenses()
@@ -286,7 +295,7 @@ class MainActivity : AppCompatActivity() {
         val year = cal.get(Calendar.YEAR)
 
         val newBudget = Budget(
-            categoryId = category.id,      // local category id
+            categoryId = category.id,     // local category id
             amountLimit = amount,
             month = month,
             year = year,
@@ -529,6 +538,8 @@ class MainActivity : AppCompatActivity() {
                         val server = resp.body()!!
                         goal.isSynced = true
                         goal.serverId = server.id
+                        // BUG FIX: Update local currentAmount to match server response
+                        goal.currentAmount = server.currentAmount
                         appDatabase.savingsGoalDao().update(goal)
                         goalsSynced++
                     } else {

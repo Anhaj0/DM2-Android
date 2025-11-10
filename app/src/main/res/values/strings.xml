@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FinanceTrackerAndroid</string>
+
     <string name="nav_open_drawer">Open navigation drawer</string>
     <string name="nav_close_drawer">Close navigation drawer</string>
+
+    <!-- Needed by item_expense.xml -->
     <string name="delete">Delete</string>
 </resources>

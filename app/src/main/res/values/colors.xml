@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#4C6EF5</color>        <color name="onPrimary">#FFFFFF</color>     <color name="secondary">#00B4AB</color>     <color name="onSecondary">#FFFFFF</color>   <color name="background">#F5F7FF</color>   <color name="surface">#FFFFFF</color>       <color name="textPrimary">#212529</color>   <color name="textSecondary">#6C757D</color> <color name="color_synced">#4CAF50</color>  <color name="teal">#00B4AB</color>
+    <color name="chart_indigo">#3F51B5</color>
+    <color name="chart_sky">#03A9F4</color>
+    <color name="chart_emerald">#4CAF50</color>
+    <color name="chart_amber">#FFC107</color>
+    <color name="chart_rose">#E91E63</color>
+    <color name="chart_violet">#9C27B0</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="color_bg">#18181B</color>
-    <color name="color_bg_secondary">#27272A</color>
-    <color name="color_text_secondary">#A1A1AA</color>
-
-    <color name="color_synced">#4ADE80</color>
 </resources>

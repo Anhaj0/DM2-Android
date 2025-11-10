@@ -4,10 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="#27272a"
-    app:cardCornerRadius="8dp"
-    app:strokeWidth="0dp">
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="New Phone"
-            android:textColor="@color/white"
+            android:textColor="@color/textPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="$0.00 / $500.00"
-            android:textColor="@color/white"
+            android:textColor="@color/textSecondary"
             app:layout_constraintStart_toStartOf="@id/textGoalName"
             app:layout_constraintTop_toBottomOf="@id/textGoalName"
             app:layout_constraintEnd_toStartOf="@id/buttonContribute"
@@ -45,7 +42,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_save"
             android:contentDescription="Contribute"
-            app:tint="@color/white"
+            app:tint="@color/primary"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toStartOf="@id/buttonDeleteGoal"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +54,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_delete"
             android:contentDescription="Delete Goal"
-            app:tint="#a1a1aa"
+            app:tint="@color/textSecondary"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

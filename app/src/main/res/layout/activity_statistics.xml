@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +16,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/stats_title" />
+            android:background="@color/primary"
+            app:title="@string/stats_title"
+            app:titleTextColor="@color/onPrimary" />
 
         <!-- This Month -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="12dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,6 +35,7 @@
                 <TextView
                     android:text="This Month"
                     android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -47,6 +51,7 @@
                         android:text="09"
                         android:textSize="28sp"
                         android:textStyle="bold"
+                        android:textColor="@color/textPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -61,34 +66,40 @@
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:text="Expenses"
+                                android:textColor="@color/textSecondary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
+
                             <TextView
                                 android:id="@+id/txtMonthExpense"
                                 android:text="-0.00"
                                 android:textStyle="bold"
+                                android:textColor="@color/textPrimary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="24dp"
-                            android:layout_height="0dp"/>
+                        <View android:layout_width="24dp" android:layout_height="0dp"/>
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:text="Income"
+                                android:textColor="@color/textSecondary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
+
                             <TextView
                                 android:id="@+id/txtMonthIncome"
                                 android:text="—"
                                 android:textStyle="bold"
+                                android:textColor="@color/textPrimary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -101,8 +112,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="12dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:padding="16dp"
@@ -126,40 +136,50 @@
                         android:text="Monthly budget"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="@color/textPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:text="Balance :"
+                        android:textColor="@color/textSecondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"/>
+
                     <TextView
                         android:id="@+id/txtBalance"
                         android:text="$0.00"
                         android:textStyle="bold"
+                        android:textColor="@color/textPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:text="Budget :"
+                        android:textColor="@color/textSecondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"/>
+
                     <TextView
                         android:id="@+id/txtBudget"
                         android:text="$0.00"
+                        android:textColor="@color/textPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:text="Expenses :"
+                        android:textColor="@color/textSecondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"/>
+
                     <TextView
                         android:id="@+id/txtSpent"
                         android:text="$0.00"
+                        android:textColor="@color/textPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -170,8 +190,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="12dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:padding="16dp"
@@ -183,6 +202,7 @@
                     android:text="Expenses"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:textColor="@color/textPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -195,6 +215,7 @@
                 <TextView
                     android:text="Top lists"
                     android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
                     android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -210,6 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No data"
+                    android:textColor="@color/textSecondary"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -218,8 +240,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="12dp">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
                 android:padding="16dp"
@@ -230,6 +251,7 @@
                 <TextView
                     android:text="Download PDF reports"
                     android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -264,6 +286,5 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

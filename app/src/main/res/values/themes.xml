@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.FinanceTrackerAndroid" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/color_bg</item>
-        <item name="android:windowBackground">@color/color_bg</item>
+<resources>
+    <style name="Theme.FinanceTrackerAndroid" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
 
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <item name="colorOutline">@color/color_text_secondary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="android:textColor">@color/textPrimary</item>
+
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.FT.Body</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.FT.Body</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.FT.BodySecondary</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.FT.Title</item>
+
+        <item name="textInputStyle">@style/Widget.FT.TextInput</item>
     </style>
+
+    <style name="TextAppearance.FT.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+    <style name="TextAppearance.FT.BodySecondary" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+    <style name="TextAppearance.FT.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="Widget.FT.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxBackgroundColor">@color/surface</item>
+        <item name="android:textColorHint">@color/textSecondary</item>
+        <item name="hintTextColor">@color/textSecondary</item>
+    </style>
+
+    <style name="Widget.FT.AutoComplete" parent="Widget.Material3.AutoCompleteTextView.OutlinedBox">
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
 </resources>
